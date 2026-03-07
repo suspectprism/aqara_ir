@@ -40,7 +40,17 @@ openapi.app_key  = config["APP_KEY"]
 openapi.key_id   = config["KEY_ID"]
 ```
 
-Credentials (`username`, `password`) and Singapore region API settings (`SINGAPORE_ENDPOINT`, `APP_ID`, `APP_KEY`, `KEY_ID`) are loaded from `config.yaml` (not committed).
+Credentials and all site-specific settings are loaded from `config.yaml` (not committed):
+
+| Key | Description |
+|---|---|
+| `username` | Aqara account username |
+| `password` | Aqara account password |
+| `SINGAPORE_ENDPOINT` | Singapore API base URL |
+| `APP_ID` | Singapore app ID |
+| `APP_KEY` | Singapore app key |
+| `KEY_ID` | Singapore key ID |
+| `tv_remote_did` | Device ID of the IR TV remote (prefixed `virtual.`) |
 
 ## IR Device API
 
@@ -59,5 +69,5 @@ Reference: https://opendoc-test.aqara.cn/en/docs/developmanual/apiDocument/IRDev
 
 1. Authenticates with the Aqara OpenAPI using credentials from `config.yaml`.
 2. Enumerates all devices, printing name, model, online state, and device ID.
-3. Queries IR remote keys for device `virtual.51540366390822` (TV remote control).
+3. Queries IR remote keys for the TV remote device specified by `tv_remote_did` in `config.yaml`.
 4. Finds the power key by name and sends a `write.ir.click` command to press it.

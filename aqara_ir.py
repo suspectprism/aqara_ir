@@ -41,7 +41,7 @@ def main():
         state = "online" if device.state == 1 else "offline"
         print(f"  [{state}] {device.device_name} ({device.model}) - {did}")
 
-    target_did = "virtual.51540366390822"
+    target_did = config["tv_remote_did"]
     target_device = device_manager.get_device(target_did)
     if target_device is None:
         print(f"\nDevice {target_did} not found.")
