@@ -1,0 +1,10 @@
+{
+  "domain": "aqara_ir",
+  "name": "Aqara IR Remote",
+  "version": "0.1.0",
+  "documentation": "https://github.com/suspectprism/aqara_ir",
+  "requirements": ["aqara-iot-py-sdk>=1.0.9"],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "cloud_polling"
+}
