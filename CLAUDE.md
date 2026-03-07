@@ -67,18 +67,23 @@ Reference: https://opendoc-test.aqara.cn/en/docs/developmanual/apiDocument/IRDev
 
 ## Home Assistant Custom Integration
 
-The integration lives in [custom_components/aqara_ir/](custom_components/aqara_ir/) and exposes the IR TV remote as a `remote` entity in Home Assistant.
+The integration lives in [custom_components/aqara_ir/](custom_components/aqara_ir/) and exposes the IR TV remote as a **button** entity in Home Assistant. It can be installed via [HACS](https://hacs.xyz) or manually.
 
 ### Files
 
 | File | Purpose |
 |---|---|
-| `manifest.json` | Integration metadata and pip requirements |
-| `const.py` | `DOMAIN` constant and config key names |
-| `__init__.py` | `async_setup` — authenticates and stores the `AqaraOpenAPI` instance in `hass.data` |
-| `button.py` | `AqaraIRPowerButton(ButtonEntity)` — exposes a single **TV Power** button, polls device online state every 30 s |
+| `hacs.json` | HACS manifest — enables discovery and installation via HACS; `render_readme: true` displays `README.md` as the HACS info page |
+| `custom_components/aqara_ir/manifest.json` | Integration metadata and pip requirements |
+| `custom_components/aqara_ir/const.py` | `DOMAIN`, config key names, and `POWER_KEY_ID = 1` |
+| `custom_components/aqara_ir/__init__.py` | `async_setup` — validates YAML config, authenticates, stores `AqaraOpenAPI` in `hass.data`, loads button platform |
+| `custom_components/aqara_ir/button.py` | `AqaraIRPowerButton(ButtonEntity)` — exposes a single **TV Power** button, polls device online state every 30 s |
 
-### Installation
+### Installation via HACS
+
+Add the repository as a custom repository in HACS (Integration category), then download and restart HA.
+
+### Manual Installation
 
 Copy the `custom_components/aqara_ir/` directory into your Home Assistant `custom_components/` folder, then add to `configuration.yaml`:
 

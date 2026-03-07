@@ -11,3 +11,6 @@ wheels/
 
 # Settings and credentials
 config.yaml
+
+# Claude Code commentary
+CLAUDE.md
