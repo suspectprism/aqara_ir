@@ -1,0 +1,7 @@
+username: "<Aqara Home username>"
+password: "<Aqara Home password>"
+SINGAPORE_ENDPOINT: "https://open-sg.aqara.com"
+APP_ID: "<SG APP_ID>"
+APP_KEY: "<SG APP_KEY>"
+KEY_ID: "<SG KEY_ID>"
+tv_remote_did: "<virtual device ID for the IR TV remote>"

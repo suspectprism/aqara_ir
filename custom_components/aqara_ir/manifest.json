@@ -1,7 +1,7 @@
 {
   "domain": "aqara_ir",
   "name": "Aqara IR Remote",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "documentation": "https://github.com/suspectprism/aqara_ir",
   "requirements": ["aqara-iot-py-sdk>=1.0.9"],
   "dependencies": [],
