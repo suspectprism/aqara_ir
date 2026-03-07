@@ -1,0 +1,10 @@
+[project]
+name = "aqara-ir"
+version = "0.1.0"
+description = "Connect to Aqara APIs for access to unpublished accessories such as infra-red services"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "aqara-iot-py-sdk>=1.0.9",
+    "pyyaml>=6.0.3",
+]
