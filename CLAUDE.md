@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-Python script to connect to Aqara APIs for access to accessories not exposed via Home Assistant integrations (e.g. infra-red services). The goal is to eventually build a Home Assistant plugin enabling automations to interact directly with infra-red Aqara accessories.
+Python script to connect to Aqara APIs for access to virtual devices not exposed via Home Assistant integrations (e.g. infra-red services). The goal is to build a Home Assistant custom integration enabling interaction directly with the infra-red TV remote control Aqara virtual device as a Home Assistant device.
 
 ## Running the Script
 
@@ -64,6 +64,50 @@ IR hub virtual devices (device IDs prefixed `virtual.`) are controlled through t
 `query.ir.keys` returns `result.keys[]`, each with `keyId`, `keyName`, `irKeyId`, and `controllerId`.
 
 Reference: https://opendoc-test.aqara.cn/en/docs/developmanual/apiDocument/IRDeviceManagement.html
+
+## Home Assistant Custom Integration
+
+The integration lives in [custom_components/aqara_ir/](custom_components/aqara_ir/) and exposes the IR TV remote as a `remote` entity in Home Assistant.
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `manifest.json` | Integration metadata and pip requirements |
+| `const.py` | `DOMAIN` constant and config key names |
+| `__init__.py` | `async_setup` — authenticates and stores the `AqaraOpenAPI` instance in `hass.data` |
+| `button.py` | `AqaraIRPowerButton(ButtonEntity)` — exposes a single **TV Power** button, polls device online state every 30 s |
+
+### Installation
+
+Copy the `custom_components/aqara_ir/` directory into your Home Assistant `custom_components/` folder, then add to `configuration.yaml`:
+
+```yaml
+aqara_ir:
+  username: peter@dowleys.com
+  password: YOUR_PASSWORD
+  singapore_endpoint: https://open-sg.aqara.com
+  app_id: YOUR_APP_ID
+  app_key: YOUR_APP_KEY
+  key_id: YOUR_KEY_ID
+  tv_remote_did: virtual.51540366390822
+```
+
+### Usage
+
+Press the button via the Home Assistant UI, or trigger it from an automation:
+
+```yaml
+service: button.press
+target:
+  entity_id: button.tv_power
+```
+
+Pressing the button sends `write.ir.click` with `keyId=1` (Power Supply) to the Aqara IR virtual device. All blocking Aqara SDK calls are dispatched via `hass.async_add_executor_job` to avoid blocking the HA event loop.
+
+### Online / Availability
+
+The entity polls `query.device.info` every 30 seconds (via `SCAN_INTERVAL` and `async_update` in `button.py`). If the Aqara API reports `state == 0` (offline), `_attr_available` is set to `False` and HA marks the entity as **Unavailable** in the UI. It recovers automatically on the next poll when the device comes back online.
 
 ## Current Script Behaviour
 

@@ -8,5 +8,7 @@ The script connects using the official Aqara python APIs and enumerates availabl
 
 It then enumerates the IR keys for the TV virtual device and presses the Power key.
 
-Subsequently the script will be used to build a Home Assistant plug-in so that Home Assistant automations can interact directly with infra-red Aqara accessories.
 
+# custom_components\aqara_ir
+
+This is a Home Assistant custom integration which is based on the successful API usage from the script. It sets up the IR TV remote virtual device as an entity in Home Assistant so that Power on/off key presses can be sent to it.
