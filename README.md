@@ -43,7 +43,7 @@ target:
   entity_id: button.tv_power
 ```
 
-The button shows as **Unavailable** when the Aqara IR hub is offline, and recovers automatically when it comes back online.
+The button shows as **Unavailable** when the Aqara IR virtual device reports offline, and recovers automatically when it comes back online. If the Aqara API session token expires, the integration re-authenticates automatically without requiring a Home Assistant restart.
 
 ## Development
 

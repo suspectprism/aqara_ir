@@ -49,6 +49,8 @@ async def async_setup(hass, config):
     hass.data[DOMAIN] = {
         "openapi": openapi,
         "tv_remote_did": conf[CONF_TV_REMOTE_DID],
+        "username": conf[CONF_USERNAME],
+        "password": conf[CONF_PASSWORD],
     }
 
     discovery.load_platform(hass, Platform.BUTTON, DOMAIN, {}, config)
