@@ -9,5 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+
+# AI agents
+CLAUDE.md
+
 # Settings and credentials
 config.yaml
